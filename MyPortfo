@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mark Joshua Miranda | Portfolio</title>
+    <style>
+        :root {
+            --primary: #00d2ff;
+            --secondary: #3a7bd5;
+            --accent: #ff007a;
+            --bg: #0f172a;
+            --card-bg: rgba(30, 41, 59, 0.7);
+            --text: #f1f5f9;
+            --text-dim: #94a3b8;
+        }
+
+        * { box-sizing: border-box; transition: all 0.3s ease; }
+
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: radial-gradient(circle at top right, #1e293b, #0f172a);
+            color: var(--text);
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Unique Floating Navbar */
+        nav {
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 1.2rem;
+            font-weight: 800;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            display: grid;
+            grid-template-columns: 350px 1fr;
+            gap: 30px;
+        }
+
+        /* Sidebar Glass Card */
+        aside {
+            background: var(--card-bg);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+            padding: 40px 30px;
+            height: fit-content;
+            text-align: center;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+        }
+
+        .profile-img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: 4px solid var(--primary);
+            margin-bottom: 20px;
+            object-fit: cover;
+            box-shadow: 0 0 20px rgba(0, 210, 255, 0.3);
+        }
+
+        h1 { margin: 10px 0; font-size: 1.8rem; }
+        .subtitle { color: var(--primary); font-weight: 500; margin-bottom: 20px; display: block; }
+
+        .contact-btn {
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            margin-bottom: 10px;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .contact-btn:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(0, 210, 255, 0.4); }
+
+        .cv-btn {
+            background: transparent;
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 12px 25px;
+            border-radius: 12px;
+            cursor: pointer;
+            width: 100%;
+            margin-bottom: 30px;
+        }
+
+        .info-list {
+            text-align: left;
+            list-style: none;
+            padding: 0;
+            font-size: 0.9rem;
+            color: var(--text-dim);
+        }
+
+        .info-list li { margin-bottom: 12px; display: flex; align-items: center; gap: 10px; }
+        .info-list a { color: var(--text); text-decoration: none; }
+        .info-list a:hover { color: var(--primary); }
+
+        /* Content Area */
+        main { display: flex; flex-direction: column; gap: 20px; }
+
+        .tabs {
+            display: flex;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 8px;
+            border-radius: 16px;
+            gap: 10px;
+        }
+
+        .tab {
+            flex: 1;
+            padding: 12px;
+            text-align: center;
+            cursor: pointer;
+            border-radius: 12px;
+            font-weight: 500;
+            color: var(--text-dim);
+        }
+
+        .tab.active {
+            background: var(--card-bg);
+            color: var(--primary);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .content-card {
+            background: var(--card-bg);
+            border-radius: 24px;
+            padding: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            min-height: 400px;
+        }
+
+        /* Grid for Projects */
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .p-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 25px;
+            border-radius: 20px;
+            text-decoration: none;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .p-card:hover {
+            background: rgba(255, 255, 255, 0.07);
+            border-color: var(--primary);
+            transform: scale(1.02);
+        }
+
+        .p-card h3 { margin: 0 0 10px 0; color: var(--primary); }
+        .p-card p { font-size: 0.9rem; color: var(--text-dim); line-height: 1.6; }
+
+        .tag-pill {
+            background: rgba(0, 210, 255, 0.1);
+            color: var(--primary);
+            padding: 4px 12px;
+            border-radius: 8px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-right: 5px;
+            display: inline-block;
+            margin-top: 10px;
+        }
+
+        .hidden { display: none !important; }
+
+        /* Experience Timeline */
+        .timeline { border-left: 2px solid var(--primary); padding-left: 30px; margin-left: 10px; }
+        .time-item { position: relative; margin-bottom: 40px; }
+        .time-item::before {
+            content: '';
+            position: absolute;
+            left: -37px;
+            top: 5px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--primary);
+            box-shadow: 0 0 10px var(--primary);
+        }
+
+        @media (max-width: 900px) {
+            .container { grid-template-columns: 1fr; }
+            aside { width: 100%; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo">MJM.DEV</div>
+        <div style="font-size: 0.9rem; opacity: 0.7;">Portfolio 2026</div>
+    </nav>
+
+    <div class="container">
+        <aside>
+            <img src="https://via.placeholder.com/150" alt="Mark Joshua Miranda" class="profile-img">
+            <h1>Mark Joshua</h1>
+            <span class="subtitle">Full-Stack Developer & Technician</span>
+            
+            <a href="https://www.facebook.com/share/179XxiExLp/?mibextid=wwXIfr" target="_blank" class="contact-btn">Message Me</a>
+            <button class="cv-btn">Download Resume</button>
+
+            <ul class="info-list">
+                <li>📍 Marikina / San Mateo, PH</li>
+                <li>📧 <a href="mailto:markjoshua@gmail.com">markjoshua@gmail.com</a></li>
+                <li>📱 DITO: <a href="tel:+639929894772">0992 989 4772</a></li>
+                <li>📱 SMART: <a href="tel:+639093726992">0909 372 6992</a></li>
+            </ul>
+
+            <div style="margin-top: 30px; text-align: left;">
+                <p style="font-size: 0.8rem; font-weight: 700; text-transform: uppercase; color: var(--primary);">Skills</p>
+                <span class="tag-pill">PC/Laptop Tech</span>
+                <span class="tag-pill">Mobile Repair</span>
+                <span class="tag-pill">HTML/CSS/JS</span>
+                <span class="tag-pill">Hardware Diagnostics</span>
+            </div>
+        </aside>
+
+        <main>
+            <div class="tabs">
+                <div class="tab active" data-target="overview">Overview</div>
+                <div class="tab" data-target="projects">Projects</div>
+                <div class="tab" data-target="experience">Experience</div>
+            </div>
+
+            <div class="content-card">
+                <div id="overview">
+                    <h2 style="margin-top:0;">Hello, I'm Mark! 👋</h2>
+                    <p style="color: var(--text-dim); line-height: 1.8;">
+                        Based in Marikina City, I specialize in the intersection of hardware and software. 
+                        Whether it's building full-stack web applications to solve organizational problems 
+                        or performing intricate hardware repairs on PCs and mobile devices, I focus on delivering 
+                        functional, reliable solutions.
+                    </p>
+                    <h3>Education</h3>
+                    <p style="color: var(--primary);">STI College Marikina <br> <small style="color: var(--text-dim);">BS Information Technology</small></p>
+                </div>
+
+                <div id="projects" class="hidden">
+                    <h2 style="margin-top:0;">Deployed Systems</h2>
+                    <div class="project-grid">
+                        <a href="https://arssticm.netlify.app/" target="_blank" class="p-card">
+                            <div>
+                                <h3>Activity Request System</h3>
+                                <p>Streamlined organizational requests with a digital approval workflow.</p>
+                            </div>
+                            <div><span class="tag-pill">Netlify Live</span></div>
+                        </a>
+
+                        <a href="https://mydtr.netlify.app/" target="_blank" class="p-card">
+                            <div>
+                                <h3>DTR Tracker</h3>
+                                <p>A digital solution for monitoring attendance and logging hours accurately.</p>
+                            </div>
+                            <div><span class="tag-pill">JavaScript</span></div>
+                        </a>
+
+                        <a href="https://sticmbt.netlify.app/" target="_blank" class="p-card">
+                            <div>
+                                <h3>Budget Transparency</h3>
+                                <p>Portal for tracking institutional budget allocations and expenditures.</p>
+                            </div>
+                            <div><span class="tag-pill">Transparency Tool</span></div>
+                        </a>
+                    </div>
+                </div>
+
+                <div id="experience" class="hidden">
+                    <h2 style="margin-top:0;">Work History</h2>
+                    <div class="timeline">
+                        <div class="time-item">
+                            <h3 style="margin:0;">IT OJT Intern</h3>
+                            <p style="color: var(--primary); margin: 5px 0;">STI College | 2026 - Present</p>
+                            <ul style="color: var(--text-dim); font-size: 0.95rem;">
+                                <li>Digitized school processes by developing custom web apps (ARS & DTR Tracker).</li>
+                                <li>Performed hardware maintenance, hinge repairs, and thermal paste application on laptops.</li>
+                                <li>Maintained smooth digital environments through routine hardware diagnostics.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        const tabs = document.querySelectorAll('.tab');
+        const contents = {
+            overview: document.getElementById('overview'),
+            projects: document.getElementById('projects'),
+            experience: document.getElementById('experience')
+        };
+
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                // Handle tab styling
+                tabs.forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+
+                // Handle content visibility
+                const target = tab.getAttribute('data-target');
+                Object.keys(contents).forEach(key => {
+                    contents[key].classList.add('hidden');
+                });
+                contents[target].classList.remove('hidden');
+            });
+        });
+    </script>
+</body>
+</html>
